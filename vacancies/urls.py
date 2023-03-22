@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import SimpleRouter
+
 from ads.views import root
+from users.views import LocationViewSet
+
+router = SimpleRouter()
+router.register("location", LocationViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,3 +31,5 @@ urlpatterns = [
     path('cat/', include('ads.urls.cat')),
     path('user/', include('users.urls.user')),
 ]
+
+urlpatterns += router.urls
